@@ -1,0 +1,92 @@
+[
+  {
+    "name": "init",
+    "file": "init.json",
+    "description": "Explicit startup handshake before decisions, including after a restart."
+  },
+  {
+    "name": "free-check",
+    "file": "free-check.json",
+    "description": "Big blind can check when nobody raised; raise uses a street total."
+  },
+  {
+    "name": "cheap-call",
+    "file": "cheap-call.json",
+    "description": "First preflop actor can call one big blind."
+  },
+  {
+    "name": "call-boundary",
+    "file": "call-boundary.json",
+    "description": "Illustrative two-big-blind call threshold."
+  },
+  {
+    "name": "expensive-call",
+    "file": "expensive-call.json",
+    "description": "The starter may fold; other legal strategies are equally valid."
+  },
+  {
+    "name": "raise-to",
+    "file": "raise-to.json",
+    "description": "Raising to 50 adds 40, not 50, to the hero contribution."
+  },
+  {
+    "name": "short-call",
+    "file": "short-call.json",
+    "description": "to_call equals 12 here; every hand originally began with equal stacks."
+  },
+  {
+    "name": "call-below-wager",
+    "file": "call-below-wager.json",
+    "description": "Unequal-stack compatibility case: hero owes 20 but has 12; the official event still resets equal stacks."
+  },
+  {
+    "name": "short-all-in-raise",
+    "file": "short-all-in-raise.json",
+    "description": "Only an all-in raise to 35 is legal, not an arbitrary sub-minimum raise."
+  },
+  {
+    "name": "bet-not-reopened",
+    "file": "bet-not-reopened.json",
+    "description": "Unequal-stack compatibility case: two short all-ins do not reopen the previous caller\u2019s betting."
+  },
+  {
+    "name": "flop-open-bet",
+    "file": "flop-open-bet.json",
+    "description": "Prior-street chips do not count toward a new bet target."
+  },
+  {
+    "name": "turn-side-pots",
+    "file": "turn-side-pots.json",
+    "description": "Current contribution layers can include an unmatched top layer pending later settlement."
+  },
+  {
+    "name": "river-no-raise",
+    "file": "river-no-raise.json",
+    "description": "There is no aggressive action against only all-in opponents."
+  },
+  {
+    "name": "hand-end-demo",
+    "file": "hand-end-demo.json",
+    "description": "The physical workshop demo settles to +50, -40, -10, 0."
+  },
+  {
+    "name": "hand-end-fold",
+    "file": "hand-end-fold.json",
+    "description": "A bot that folded still receives the public result and can update state."
+  },
+  {
+    "name": "uncontested-end",
+    "file": "uncontested-end.json",
+    "description": "No runout or folded/private hands are revealed after an uncontested win."
+  },
+  {
+    "name": "hand-end-odd-chip-split",
+    "file": "hand-end-odd-chip-split.json",
+    "description": "Two players tie on a royal-flush board; the first winner left of the button receives the odd chip."
+  },
+  {
+    "name": "hand-end-side-pots",
+    "file": "hand-end-side-pots.json",
+    "description": "Unequal-stack compatibility case: the strongest hand wins the main pot, another hand wins the side pot."
+  }
+]

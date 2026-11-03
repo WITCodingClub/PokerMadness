@@ -1,0 +1,191 @@
+{
+  "protocol_version": "0.1",
+  "request_id": "hand-end-side-pots",
+  "type": "hand_end",
+  "round_id": "round-example",
+  "bot_id": "entry-example",
+  "random_seed": 18,
+  "time_budget_ms": 1000,
+  "user_state": {},
+  "result": {
+    "hand_id": "side-pot-hand",
+    "hand_number": 1,
+    "hero_seat": 0,
+    "button_seat": 0,
+    "starting_stack": 400,
+    "hole_cards": [
+      "As",
+      "Ah"
+    ],
+    "board": [
+      "2c",
+      "3d",
+      "4h",
+      "9s",
+      "Jc"
+    ],
+    "reason": "showdown",
+    "players": [
+      {
+        "seat": 0,
+        "player_id": "player-0",
+        "final_stack": 1200,
+        "net_chips": 800,
+        "shown_cards": [
+          "As",
+          "Ah"
+        ],
+        "starting_stack": 400
+      },
+      {
+        "seat": 1,
+        "player_id": "player-1",
+        "final_stack": 600,
+        "net_chips": -100,
+        "shown_cards": [
+          "Ks",
+          "Kh"
+        ],
+        "starting_stack": 700
+      },
+      {
+        "seat": 2,
+        "player_id": "player-2",
+        "final_stack": 300,
+        "net_chips": -700,
+        "shown_cards": [
+          "Qs",
+          "Qh"
+        ],
+        "starting_stack": 1000
+      },
+      {
+        "seat": 3,
+        "player_id": "player-3",
+        "final_stack": 1000,
+        "net_chips": 0,
+        "shown_cards": [],
+        "starting_stack": 1000
+      }
+    ],
+    "pots": [
+      {
+        "amount": 1200,
+        "eligible_seats": [
+          0,
+          1,
+          2
+        ],
+        "awards": [
+          {
+            "seat": 0,
+            "amount": 1200
+          }
+        ]
+      },
+      {
+        "amount": 600,
+        "eligible_seats": [
+          1,
+          2
+        ],
+        "awards": [
+          {
+            "seat": 1,
+            "amount": 600
+          }
+        ]
+      }
+    ],
+    "history": [
+      {
+        "event_id": 0,
+        "street": "preflop",
+        "type": "post_blind",
+        "seat": 1,
+        "amount": 5,
+        "blind": "small",
+        "street_total": 5
+      },
+      {
+        "event_id": 1,
+        "street": "preflop",
+        "type": "post_blind",
+        "seat": 2,
+        "amount": 10,
+        "blind": "big",
+        "street_total": 10
+      },
+      {
+        "event_id": 2,
+        "street": "preflop",
+        "type": "action",
+        "seat": 3,
+        "action": "fold",
+        "amount": 0,
+        "street_total": 0,
+        "all_in": false,
+        "fallback": false
+      },
+      {
+        "event_id": 3,
+        "street": "preflop",
+        "type": "action",
+        "seat": 0,
+        "action": "raise",
+        "amount": 400,
+        "street_total": 400,
+        "all_in": true,
+        "fallback": false
+      },
+      {
+        "event_id": 4,
+        "street": "preflop",
+        "type": "action",
+        "seat": 1,
+        "action": "raise",
+        "amount": 695,
+        "street_total": 700,
+        "all_in": true,
+        "fallback": false
+      },
+      {
+        "event_id": 5,
+        "street": "preflop",
+        "type": "action",
+        "seat": 2,
+        "action": "call",
+        "amount": 690,
+        "street_total": 700,
+        "all_in": false,
+        "fallback": false
+      },
+      {
+        "event_id": 6,
+        "street": "flop",
+        "type": "deal_board",
+        "cards": [
+          "2c",
+          "3d",
+          "4h"
+        ]
+      },
+      {
+        "event_id": 7,
+        "street": "turn",
+        "type": "deal_board",
+        "cards": [
+          "9s"
+        ]
+      },
+      {
+        "event_id": 8,
+        "street": "river",
+        "type": "deal_board",
+        "cards": [
+          "Jc"
+        ]
+      }
+    ]
+  }
+}

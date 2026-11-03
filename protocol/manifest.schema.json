@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Poker Madness submission manifest",
+  "type": "object",
+  "properties": {
+    "protocol_version": {
+      "const": "0.1"
+    },
+    "bot_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "entry_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 128
+    },
+    "language": {
+      "enum": [
+        "python",
+        "javascript",
+        "java"
+      ]
+    },
+    "contributors": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      },
+      "minItems": 1,
+      "maxItems": 100
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "name",
+          "version",
+          "purpose"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "precomputed_data": {
+      "type": "string",
+      "maxLength": 5000
+    }
+  },
+  "required": [
+    "protocol_version",
+    "bot_name",
+    "entry_id",
+    "language",
+    "contributors",
+    "dependencies",
+    "precomputed_data"
+  ],
+  "additionalProperties": false
+}

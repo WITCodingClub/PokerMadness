@@ -1,0 +1,888 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Poker Madness 0.1 request",
+  "$defs": {
+    "player": {
+      "type": "object",
+      "properties": {
+        "seat": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "player_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "starting_stack": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "stack": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "street_contribution": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "hand_contribution": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "status": {
+          "enum": [
+            "active",
+            "folded",
+            "all_in"
+          ]
+        }
+      },
+      "required": [
+        "seat",
+        "player_id",
+        "starting_stack",
+        "stack",
+        "street_contribution",
+        "hand_contribution",
+        "status"
+      ],
+      "additionalProperties": true
+    },
+    "pot": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "eligible_seats": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5
+          },
+          "minItems": 1,
+          "maxItems": 6,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "amount",
+        "eligible_seats"
+      ],
+      "additionalProperties": true
+    },
+    "legalAction": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "fold"
+            }
+          },
+          "required": [
+            "action"
+          ],
+          "additionalProperties": true
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "check"
+            }
+          },
+          "required": [
+            "action"
+          ],
+          "additionalProperties": true
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "call"
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          "required": [
+            "action",
+            "amount"
+          ],
+          "additionalProperties": true
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "enum": [
+                "bet",
+                "raise"
+              ]
+            },
+            "min_amount": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "max_amount": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          "required": [
+            "action",
+            "min_amount",
+            "max_amount"
+          ],
+          "additionalProperties": true
+        }
+      ]
+    },
+    "action": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "enum": [
+                "check",
+                "call",
+                "fold"
+              ]
+            }
+          },
+          "required": [
+            "action"
+          ],
+          "additionalProperties": true
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "enum": [
+                "bet",
+                "raise"
+              ]
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          "required": [
+            "action",
+            "amount"
+          ],
+          "additionalProperties": true
+        }
+      ]
+    },
+    "event": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "event_id": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "street": {
+              "enum": [
+                "preflop",
+                "flop",
+                "turn",
+                "river"
+              ]
+            },
+            "type": {
+              "const": "post_blind"
+            },
+            "seat": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 5
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "blind": {
+              "enum": [
+                "small",
+                "big"
+              ]
+            },
+            "street_total": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          "required": [
+            "event_id",
+            "street",
+            "type",
+            "seat",
+            "amount",
+            "blind",
+            "street_total"
+          ],
+          "additionalProperties": true
+        },
+        {
+          "type": "object",
+          "properties": {
+            "event_id": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "street": {
+              "enum": [
+                "preflop",
+                "flop",
+                "turn",
+                "river"
+              ]
+            },
+            "type": {
+              "const": "action"
+            },
+            "seat": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 5
+            },
+            "action": {
+              "enum": [
+                "check",
+                "call",
+                "fold",
+                "bet",
+                "raise"
+              ]
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "street_total": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "all_in": {
+              "type": "boolean"
+            },
+            "fallback": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "event_id",
+            "street",
+            "type",
+            "seat",
+            "action",
+            "amount",
+            "street_total",
+            "all_in",
+            "fallback"
+          ],
+          "additionalProperties": true
+        },
+        {
+          "type": "object",
+          "properties": {
+            "event_id": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "street": {
+              "enum": [
+                "preflop",
+                "flop",
+                "turn",
+                "river"
+              ]
+            },
+            "type": {
+              "const": "return_uncalled"
+            },
+            "seat": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 5
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "street_total": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            }
+          },
+          "required": [
+            "event_id",
+            "street",
+            "type",
+            "seat",
+            "amount",
+            "street_total"
+          ],
+          "additionalProperties": true
+        },
+        {
+          "type": "object",
+          "properties": {
+            "event_id": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "street": {
+              "enum": [
+                "preflop",
+                "flop",
+                "turn",
+                "river"
+              ]
+            },
+            "type": {
+              "const": "deal_board"
+            },
+            "cards": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[2-9TJQKA][cdhs]$"
+              },
+              "minItems": 1,
+              "maxItems": 3
+            }
+          },
+          "required": [
+            "event_id",
+            "street",
+            "type",
+            "cards"
+          ],
+          "additionalProperties": true
+        }
+      ]
+    },
+    "observation": {
+      "type": "object",
+      "properties": {
+        "hand_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "hand_number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "street": {
+          "enum": [
+            "preflop",
+            "flop",
+            "turn",
+            "river"
+          ]
+        },
+        "hero_seat": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "button_seat": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "small_blind": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "big_blind": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "starting_stack": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "hole_cards": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[2-9TJQKA][cdhs]$"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "board": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[2-9TJQKA][cdhs]$"
+          },
+          "minItems": 0,
+          "maxItems": 5
+        },
+        "players": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/player"
+          },
+          "minItems": 2,
+          "maxItems": 6
+        },
+        "pot": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "pots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pot"
+          },
+          "minItems": 0,
+          "maxItems": 6
+        },
+        "current_bet": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "to_call": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "legal_actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/legalAction"
+          },
+          "minItems": 1,
+          "maxItems": 5
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/event"
+          },
+          "minItems": 0,
+          "maxItems": 10000
+        }
+      },
+      "required": [
+        "hand_id",
+        "hand_number",
+        "street",
+        "hero_seat",
+        "button_seat",
+        "small_blind",
+        "big_blind",
+        "starting_stack",
+        "hole_cards",
+        "board",
+        "players",
+        "pot",
+        "pots",
+        "current_bet",
+        "to_call",
+        "legal_actions",
+        "history"
+      ],
+      "additionalProperties": true
+    },
+    "resultPlayer": {
+      "type": "object",
+      "properties": {
+        "seat": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "player_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "starting_stack": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "final_stack": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "net_chips": {
+          "type": "integer",
+          "minimum": -2147483647,
+          "maximum": 2147483647
+        },
+        "shown_cards": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[2-9TJQKA][cdhs]$"
+          },
+          "minItems": 0,
+          "maxItems": 2
+        }
+      },
+      "required": [
+        "seat",
+        "player_id",
+        "starting_stack",
+        "final_stack",
+        "net_chips",
+        "shown_cards"
+      ],
+      "additionalProperties": true
+    },
+    "award": {
+      "type": "object",
+      "properties": {
+        "seat": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "amount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "seat",
+        "amount"
+      ],
+      "additionalProperties": true
+    },
+    "settledPot": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "eligible_seats": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5
+          },
+          "minItems": 1,
+          "maxItems": 6,
+          "uniqueItems": true
+        },
+        "awards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/award"
+          },
+          "minItems": 1,
+          "maxItems": 6
+        }
+      },
+      "required": [
+        "amount",
+        "eligible_seats",
+        "awards"
+      ],
+      "additionalProperties": true
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "hand_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "hand_number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "hero_seat": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "button_seat": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "starting_stack": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "hole_cards": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[2-9TJQKA][cdhs]$"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "board": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[2-9TJQKA][cdhs]$"
+          },
+          "minItems": 0,
+          "maxItems": 5
+        },
+        "reason": {
+          "enum": [
+            "showdown",
+            "all_folded"
+          ]
+        },
+        "players": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/resultPlayer"
+          },
+          "minItems": 2,
+          "maxItems": 6
+        },
+        "pots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/settledPot"
+          },
+          "minItems": 0,
+          "maxItems": 6
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/event"
+          },
+          "minItems": 0,
+          "maxItems": 10000
+        }
+      },
+      "required": [
+        "hand_id",
+        "hand_number",
+        "hero_seat",
+        "button_seat",
+        "starting_stack",
+        "hole_cards",
+        "board",
+        "reason",
+        "players",
+        "pots",
+        "history"
+      ],
+      "additionalProperties": true
+    }
+  },
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "protocol_version": {
+          "const": "0.1"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "round_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "bot_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "random_seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "time_budget_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "user_state": {
+          "type": "object",
+          "maxProperties": 0
+        },
+        "type": {
+          "const": "init"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "request_id",
+        "round_id",
+        "bot_id",
+        "random_seed",
+        "time_budget_ms",
+        "user_state",
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "protocol_version": {
+          "const": "0.1"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "round_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "bot_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "random_seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "time_budget_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "user_state": {
+          "type": "object"
+        },
+        "type": {
+          "const": "act"
+        },
+        "observation": {
+          "$ref": "#/$defs/observation"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "request_id",
+        "round_id",
+        "bot_id",
+        "random_seed",
+        "time_budget_ms",
+        "user_state",
+        "type",
+        "observation"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "properties": {
+        "protocol_version": {
+          "const": "0.1"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "round_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "bot_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "random_seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "time_budget_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "user_state": {
+          "type": "object"
+        },
+        "type": {
+          "const": "hand_end"
+        },
+        "result": {
+          "$ref": "#/$defs/result"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "request_id",
+        "round_id",
+        "bot_id",
+        "random_seed",
+        "time_budget_ms",
+        "user_state",
+        "type",
+        "result"
+      ],
+      "additionalProperties": true
+    }
+  ]
+}

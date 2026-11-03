@@ -1,0 +1,134 @@
+{
+  "protocol_version": "0.1",
+  "request_id": "expensive-call",
+  "type": "act",
+  "round_id": "round-example",
+  "bot_id": "entry-example",
+  "random_seed": 17,
+  "time_budget_ms": 1000,
+  "user_state": {},
+  "observation": {
+    "hand_id": "expensive-call-hand",
+    "hand_number": 1,
+    "street": "preflop",
+    "hero_seat": 0,
+    "button_seat": 0,
+    "small_blind": 5,
+    "big_blind": 10,
+    "starting_stack": 1000,
+    "hole_cards": [
+      "As",
+      "Kc"
+    ],
+    "board": [],
+    "players": [
+      {
+        "seat": 0,
+        "player_id": "player-0",
+        "starting_stack": 1000,
+        "stack": 1000,
+        "street_contribution": 0,
+        "hand_contribution": 0,
+        "status": "active"
+      },
+      {
+        "seat": 1,
+        "player_id": "player-1",
+        "starting_stack": 1000,
+        "stack": 995,
+        "street_contribution": 5,
+        "hand_contribution": 5,
+        "status": "active"
+      },
+      {
+        "seat": 2,
+        "player_id": "player-2",
+        "starting_stack": 1000,
+        "stack": 990,
+        "street_contribution": 10,
+        "hand_contribution": 10,
+        "status": "active"
+      },
+      {
+        "seat": 3,
+        "player_id": "player-3",
+        "starting_stack": 1000,
+        "stack": 920,
+        "street_contribution": 80,
+        "hand_contribution": 80,
+        "status": "active"
+      }
+    ],
+    "pot": 95,
+    "pots": [
+      {
+        "amount": 15,
+        "eligible_seats": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "amount": 10,
+        "eligible_seats": [
+          2,
+          3
+        ]
+      },
+      {
+        "amount": 70,
+        "eligible_seats": [
+          3
+        ]
+      }
+    ],
+    "current_bet": 80,
+    "to_call": 80,
+    "legal_actions": [
+      {
+        "action": "fold"
+      },
+      {
+        "action": "call",
+        "amount": 80
+      },
+      {
+        "action": "raise",
+        "min_amount": 150,
+        "max_amount": 1000
+      }
+    ],
+    "history": [
+      {
+        "event_id": 0,
+        "street": "preflop",
+        "type": "post_blind",
+        "seat": 1,
+        "amount": 5,
+        "blind": "small",
+        "street_total": 5
+      },
+      {
+        "event_id": 1,
+        "street": "preflop",
+        "type": "post_blind",
+        "seat": 2,
+        "amount": 10,
+        "blind": "big",
+        "street_total": 10
+      },
+      {
+        "event_id": 2,
+        "street": "preflop",
+        "type": "action",
+        "seat": 3,
+        "action": "raise",
+        "amount": 80,
+        "street_total": 80,
+        "all_in": false,
+        "fallback": false
+      }
+    ]
+  }
+}

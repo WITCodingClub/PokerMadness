@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Poker Madness 0.1 response",
+  "$defs": {
+    "action": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "enum": [
+                "check",
+                "call",
+                "fold"
+              ]
+            }
+          },
+          "required": [
+            "action"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "enum": [
+                "bet",
+                "raise"
+              ]
+            },
+            "amount": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          "required": [
+            "action",
+            "amount"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "protocol_version": {
+          "const": "0.1"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "type": {
+          "const": "ready"
+        },
+        "user_state": {
+          "type": "object",
+          "maxProperties": 0
+        }
+      },
+      "required": [
+        "protocol_version",
+        "request_id",
+        "type",
+        "user_state"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "protocol_version": {
+          "const": "0.1"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "type": {
+          "const": "action"
+        },
+        "action": {
+          "$ref": "#/$defs/action"
+        },
+        "user_state": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "request_id",
+        "type",
+        "action",
+        "user_state"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "protocol_version": {
+          "const": "0.1"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "type": {
+          "const": "ack"
+        },
+        "user_state": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "request_id",
+        "type",
+        "user_state"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

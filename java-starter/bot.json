@@ -1,0 +1,11 @@
+{
+  "protocol_version": "0.1",
+  "bot_name": "Example Java Bot",
+  "entry_id": null,
+  "language": "java",
+  "contributors": ["REPLACE WITH YOUR NAME"],
+  "dependencies": [
+    {"name": "com.google.code.gson:gson", "version": "2.13.2", "purpose": "Organizer starter JSON protocol"}
+  ],
+  "precomputed_data": "None in the example strategy"
+}

@@ -1,0 +1,8 @@
+/target/
+/dist/
+/.idea/
+/.classpath
+/.project
+/.settings/
+*.iml
+__pycache__/

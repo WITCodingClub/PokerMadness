@@ -1,0 +1,10 @@
+{
+  "protocol_version": "0.1",
+  "request_id": "init-example",
+  "type": "init",
+  "round_id": "round-example",
+  "bot_id": "entry-example",
+  "random_seed": 16,
+  "time_budget_ms": 10000,
+  "user_state": {}
+}

@@ -1,0 +1,201 @@
+{
+  "protocol_version": "0.1",
+  "request_id": "flop-open-bet",
+  "type": "act",
+  "round_id": "round-example",
+  "bot_id": "entry-example",
+  "random_seed": 17,
+  "time_budget_ms": 1000,
+  "user_state": {},
+  "observation": {
+    "hand_id": "flop-open-bet-hand",
+    "hand_number": 1,
+    "street": "flop",
+    "hero_seat": 0,
+    "button_seat": 0,
+    "small_blind": 5,
+    "big_blind": 10,
+    "starting_stack": 1000,
+    "hole_cards": [
+      "As",
+      "Kc"
+    ],
+    "board": [
+      "Ad",
+      "9c",
+      "7s"
+    ],
+    "players": [
+      {
+        "seat": 0,
+        "player_id": "player-0",
+        "starting_stack": 1000,
+        "stack": 980,
+        "street_contribution": 0,
+        "hand_contribution": 20,
+        "status": "active"
+      },
+      {
+        "seat": 1,
+        "player_id": "player-1",
+        "starting_stack": 1000,
+        "stack": 980,
+        "street_contribution": 0,
+        "hand_contribution": 20,
+        "status": "active"
+      },
+      {
+        "seat": 2,
+        "player_id": "player-2",
+        "starting_stack": 1000,
+        "stack": 980,
+        "street_contribution": 0,
+        "hand_contribution": 20,
+        "status": "active"
+      },
+      {
+        "seat": 3,
+        "player_id": "player-3",
+        "starting_stack": 1000,
+        "stack": 980,
+        "street_contribution": 0,
+        "hand_contribution": 20,
+        "status": "active"
+      }
+    ],
+    "pot": 80,
+    "pots": [
+      {
+        "amount": 80,
+        "eligible_seats": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ],
+    "current_bet": 0,
+    "to_call": 0,
+    "legal_actions": [
+      {
+        "action": "fold"
+      },
+      {
+        "action": "check"
+      },
+      {
+        "action": "bet",
+        "min_amount": 10,
+        "max_amount": 980
+      }
+    ],
+    "history": [
+      {
+        "event_id": 0,
+        "street": "preflop",
+        "type": "post_blind",
+        "seat": 1,
+        "amount": 5,
+        "blind": "small",
+        "street_total": 5
+      },
+      {
+        "event_id": 1,
+        "street": "preflop",
+        "type": "post_blind",
+        "seat": 2,
+        "amount": 10,
+        "blind": "big",
+        "street_total": 10
+      },
+      {
+        "event_id": 2,
+        "street": "preflop",
+        "type": "action",
+        "seat": 3,
+        "action": "raise",
+        "amount": 20,
+        "street_total": 20,
+        "all_in": false,
+        "fallback": false
+      },
+      {
+        "event_id": 3,
+        "street": "preflop",
+        "type": "action",
+        "seat": 0,
+        "action": "call",
+        "amount": 20,
+        "street_total": 20,
+        "all_in": false,
+        "fallback": false
+      },
+      {
+        "event_id": 4,
+        "street": "preflop",
+        "type": "action",
+        "seat": 1,
+        "action": "call",
+        "amount": 15,
+        "street_total": 20,
+        "all_in": false,
+        "fallback": false
+      },
+      {
+        "event_id": 5,
+        "street": "preflop",
+        "type": "action",
+        "seat": 2,
+        "action": "call",
+        "amount": 10,
+        "street_total": 20,
+        "all_in": false,
+        "fallback": false
+      },
+      {
+        "event_id": 6,
+        "street": "flop",
+        "type": "deal_board",
+        "cards": [
+          "Ad",
+          "9c",
+          "7s"
+        ]
+      },
+      {
+        "event_id": 7,
+        "street": "flop",
+        "type": "action",
+        "seat": 1,
+        "action": "check",
+        "amount": 0,
+        "street_total": 0,
+        "all_in": false,
+        "fallback": false
+      },
+      {
+        "event_id": 8,
+        "street": "flop",
+        "type": "action",
+        "seat": 2,
+        "action": "check",
+        "amount": 0,
+        "street_total": 0,
+        "all_in": false,
+        "fallback": false
+      },
+      {
+        "event_id": 9,
+        "street": "flop",
+        "type": "action",
+        "seat": 3,
+        "action": "check",
+        "amount": 0,
+        "street_total": 0,
+        "all_in": false,
+        "fallback": false
+      }
+    ]
+  }
+}
